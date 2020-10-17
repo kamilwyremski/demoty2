@@ -1,0 +1,74 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+	<h1 class="is-size-2">{{ contact_page.name }}</h1>
+	<br>
+	{{ contact_page.content|raw }}
+	<br>
+	<h2 class="is-size-4">{{ 'Contact form'|lang }}</h2>
+	<br>
+	{% include 'alert.tpl' %}
+	<form method="post" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="send_message">
+		<div class="field">
+			<label for="name" class="label has-text-light">{{ 'Name'|lang }}</label>
+			<div class="control">
+				<input class="input" type="text" name="name" placeholder="{{ 'John Smith'|lang }}" id="name" required value="{{ input.name }}" title="{{ 'Enter your name'|lang }}">
+			</div>
+		</div>
+		<div class="field">
+			<label for="email" class="label has-text-light">{{ 'E-mail address'|lang }}</label>
+			<div class="control">
+				<input type="email" class="input" id="email" name="email" placeholder="{{ 'example@example.com'|lang }}" required value="{% if input.email %}{{ input.email }}{% elseif user.id %}{{ user.email }}{% endif %}" title="{{ 'Enter your email address'|lang }}">
+			</div>
+		</div>
+		<div class="field">
+			<label for="message" class="label has-text-light">{{ 'Message'|lang }}</label>
+			<div class="control">
+				<textarea class="textarea" rows="4" name="message" id="message" required placeholder="{{ 'My message'|lang }}" title="{{ 'Enter your message'|lang }}">{{ input.message }}</textarea>
+			</div>
+		</div>
+		{% if settings.mail_attachment %}
+			<div class="field">
+				<label for="attachment" class="label has-text-light">{{ 'Attachment'|lang }}</label>
+				<div class="control">
+					<div class="file">
+						<label class="file-label">
+							<input class="file-input" type="file" name="attachment" id="attachment">
+							<span class="file-cta">
+								<span class="file-icon"><i class="fas fa-upload"></i></span>
+								<span class="file-label">{{ 'Attachment'|lang }}</span>
+							</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+		<div class="field">
+			<label for="captcha" class="label has-text-light">{{ 'Enter the code Captcha'|lang }}</label>
+			<div class="control">
+				<img src="{{ path('captcha') }}" alt="captcha">
+				<input class="input" type="text" placeholder="abc123" title="{{ 'Enter the code Captcha'|lang }}" name="captcha" id="captcha" required maxlength="32">
+			</div>
+		</div>
+		<div class="field">
+			<div class="control">
+				<label class="checkbox has-text-light">
+					<input type="checkbox" name="rules" id="rules" required {% if input.rules %}checked{% endif %}>
+					{{ 'Accepts the terms and conditions and the privacy policy'|lang }}: <a href="{{ path('rules') }}" title="{{ 'Terms of service'|lang }}" target="_blank" class="has-text-white-ter">{{ 'Terms of service'|lang }}</a> - <a href="{{ path('privacy_policy') }}" title="{{ 'Privacy policy'|lang }}" target="_blank" class="has-text-white-ter">{{ 'Privacy policy'|lang }}</a>
+				</label>
+			</div>
+		</div>
+		<div class="field">
+			<div class="control">
+				<input type="submit" class="button is-light" value="{{ 'Send!'|lang }}">
+			</div>
+		</div>
+	</form>
+	<br><br>
+</div>
+
+{% endblock %}

@@ -1,0 +1,147 @@
+body{
+	background-color: #221a1a;
+}
+.page_box{
+	margin: auto; padding: 20px 30px 50px; max-width: 1200px;
+}
+.content{
+	max-width: 1200px; margin: auto;
+}
+.navbar_box{
+	border-bottom: solid 2px white;
+}
+.menu_box_search{
+	width: 270px; max-width: 100%; padding-left: 10px; padding-right: 10px;
+}
+.ads{
+	margin: 10px 0;
+}
+.tabs a{
+	background-color: rgba(255,255,255,0.5);
+}
+a.has-text-white-ter:hover{
+	color: white !important;
+}
+a{
+	color: #f5f5f5;
+}
+a:hover{
+	color: white;
+}
+.pagination a{
+	color: #f5f5f5;
+}
+.pagination a:hover{
+	color: white;
+}
+.ads_aside{
+	max-width: 160px;	display: inline-block; overflow: hidden;
+}
+strong{
+	color: inherit;
+}
+/* pictures */
+#pictures_box{
+	width: 600px; max-width: 100%; margin-top: 12px;
+}
+.picture{
+	margin-bottom: 50px;
+}
+.set_voice_outside{
+	display: inline-block; vertical-align: top;
+}
+.set_voice_outside .set_voice_box{
+	display: inline-block; vertical-align: top; margin: 0 3px;
+}
+.picture_data{
+ 	display: inline-block; vertical-align: top; margin-top: 5px;
+}
+.picture_social{
+	margin: 10px 0;
+}
+.button_social{
+	display: inline-block; vertical-align: top; margin: 7px;
+}
+.picture_list img{
+	width: 150px;
+}
+/* add picture */
+#form_add_picture input[type=color]{
+	width: 70px; display: inline-block;
+}
+#form_add_picture .box_select_border{
+	display: inline-block;
+}
+#form_add_picture .box_select_border span{
+	display: inline-block; margin-top: 5px; margin-left: 10px;
+}
+.mem_pattern{
+	margin: 5px 0 0 0;
+}
+.mem_pattern img{
+	border: solid 1px black; height: 50px;
+}
+.mem_pattern input:checked ~ img{
+	border-color: white;
+}
+.mem_pattern input[type=radio]{
+	opacity:0; width:0; height:0; margin:0;
+}
+.mem_pattern+.mem_pattern{
+	margin:0;
+}
+#preview_picture_box{
+	display: none;
+}
+#preview_picture_load{
+	position: absolute; right:50%; top: 100px; font-size: 2em; display: none;
+}
+/* icon load */
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+.fa-spinner-animate{
+    animation: spin .7s infinite linear; 
+}
+/* footer */
+.footer{
+	padding: 2rem 1.5rem 2rem;
+}
+.footer .content ul{
+	margin:0; list-style: none;
+}
+/* side panel facebook */
+#facebook_panel{
+	right: -300px; z-index: 1000; background-color: #2980b9; width: 300px; padding: 1px; height:354px; position: fixed; top: 88px; border: 1px solid white; transition: all 0.5s;
+}
+#facebook_panel:hover{
+	right:0;
+}
+#facebook_panel_image{
+	position: absolute; top:-1px; left:-40px; width:40px; height: 51px; background-color: #2980b9; border: solid 1px white; border-right: none; border-top-left-radius: 2px; border-bottom-left-radius: 2px;
+}
+#facebook_panel_image img{
+	position: absolute; top:15px; left: 14px;
+}
+#facebook-jssdk-iframe{
+	display: none;
+}
+/* cookie alert */
+#cookies-message{
+	color: white; padding: 12px 10px; position: fixed; bottom:0px; left:0; right:0; background-color: rgba(0,0,0,0.6); z-index: 100000; box-shadow: 0 0 5px rgba(0,0,0,0.4); display: none; text-align: center;
+}
+#accept-cookies-checkbox{
+	background-color: #00AFBF; color: #FFF; border: solid 1px #00AFBF; transition: all 0.3s; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-left: 10px; text-decoration: none;
+}
+#accept-cookies-checkbox:hover{
+	background-color: transparent; border-color: white;
+}
+#rodo-message .button{
+	white-space: normal; height: auto;
+}
+@media(max-width: 768px) {
+	.picture_list img{
+		width: 80px;
+	}
+}

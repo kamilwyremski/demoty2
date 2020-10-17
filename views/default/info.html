@@ -1,0 +1,23 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+	{% if info_page %}
+		<h1 class="is-size-2">{{ info_page.name }}</h1>
+		<p><a href="{{ path('info') }}" title="{{ 'Return to the list of pages'|lang }}" class="has-text-white-ter">{{ 'Return to the list of pages'|lang }}</a></p>
+		<br>
+		{{ info_page.content|raw }}
+		<br><br>
+	{% else %}
+		<h1 class="is-size-2">{{ 'Info'|lang }}</h1>
+		<br>
+		{% for item in info %}
+			<a href="{% if item.page=='contact' %}{{ path('contact') }}{% else %}{{ path('info',item.id,item.slug) }}{% endif %}" title="{{ item.name }}" class="title is-size-4 has-text-white-ter">{{ item.name }}</a>
+			<hr>
+		{% endfor %}
+	{% endif %}
+</div>
+
+{% endblock %}

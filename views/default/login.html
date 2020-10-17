@@ -1,0 +1,201 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+<div class="page_box">
+	<div class="tabs is-boxed">
+		<ul>
+			<li class="tablinks {% if tab_active=='login' %}is-active{% endif %}"><a onclick="openTab(event, 'login')" title="{{ 'Log in'|lang }}">{{ 'Log in'|lang }}</a></li>
+			<li class="tablinks {% if tab_active=='register' %}is-active{% endif %}"><a onclick="openTab(event, 'register')" title="{{ 'Register'|lang }}">{{ 'Register'|lang }}</a></li>
+			<li class="tablinks {% if tab_active=='reset_password' %}is-active{% endif %}"><a onclick="openTab(event, 'reset_password')" title="{{ 'Reset password'|lang }}">{{ 'Reset password'|lang }}</a></li>
+		</ul>
+	</div>
+	{% include 'alert.tpl' %}
+	<div id="login" class="tabcontent" {% if tab_active!='login' %}style="display: none"{% endif %}>
+		{% if form_complete_data %}
+			<form method="post">
+				<input type="hidden" name="action" value="complete_data">
+				<h1 class="is-size-2">{{ 'Complete data'|lang }}</h1><br>
+				<h2 class="is-size-4">{{ 'To continue, enter the login you want to use on the site'|lang }}</h2><br>
+				<div class="field">
+					<label for="login_username" class="label has-text-light">{{ 'Username'|lang }}</label>
+					<div class="control has-icons-left">
+						<input class="input" type="text" name="username" placeholder="{{ 'Username'|lang }}" id="login_username" required maxlength="64" value="{{ input.username }}" title="{{ 'Enter your username. Use only characters:'|lang }} a-z0-9-_" pattern="[a-z0-9-_]+">
+					 	<span class="icon is-small is-left">
+						 	<i class="fas fa-user"></i>
+					 	</span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<input type="submit" class="button is-light" value="{{ 'Save'|lang }}">
+					</div>
+				</div>
+			</form>
+		{% else %}
+			<form method="post">
+				<input type="hidden" name="action" value="login">
+				<input type="hidden" name="session_code" value="{{ session_code }}">
+				<h1 class="is-size-2">{{ 'Log in'|lang }}</h1><br>
+				<div class="field">
+					<label for="login_username" class="label has-text-light">{{ 'Username / email'|lang }}</label>
+					<div class="control has-icons-left">
+						<input class="input" type="text" name="username" placeholder="{{ 'example@example.com'|lang }}" id="login_username" required value="{{ post.username }}" title="{{ 'Enter your username or e-mail'|lang }}">
+					 	<span class="icon is-small is-left">
+						 	<i class="fas fa-user"></i>
+					 	</span>
+					</div>
+				</div>
+				<div class="field">
+					<label for="login_password" class="label has-text-light">{{ 'Password'|lang }}</label>
+					<div class="control has-icons-left">
+						<input class="input" type="password" name="password" placeholder="****" id="login_password" required title="{{ 'Enter your password'|lang }}">
+					 	<span class="icon is-small is-left">
+						 	<i class="fas fa-key"></i>
+					 	</span>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<input type="submit" class="button is-light" value="{{ 'Log in'|lang }}">
+					</div>
+				</div>
+				{% if facebook_redirect_uri or google_redirect_uri %}<br>{% endif %}
+				{% if facebook_redirect_uri %}
+					<a href="{{ facebook_redirect_uri }}" title="{{ 'Log in by FB'|lang }}" class="button is-link is-small">{{ 'Log in by FB'|lang }}</a>
+				{% endif %}
+				{% if google_redirect_uri %}
+					<a href="{{ google_redirect_uri }}" title="{{ 'Log in by Google'|lang }}" class="button is-danger is-small">{{ 'Log in by Google'|lang }}</a>
+				{% endif %}
+			</form>
+		{% endif %}
+	</div>
+	<div id="register" class="tabcontent" {% if tab_active!='register' %}style="display: none"{% endif %}>
+		<form method="post" action="{{ path('login') }}">
+			<input type="hidden" name="action" value="register">
+			<h1 class="is-size-2">{{ 'Register'|lang }}</h1><br>
+			{% if error.info %}
+				<div class="notification is-danger">{{ error.info }}</div>
+			{% endif %}
+			<div class="field">
+				<label for="register_email" class="label has-text-light">{{ 'E-mail address'|lang }}</label>
+				{% if error.email %}
+					<div class="notification is-danger">{{ error.email }}</div>
+				{% endif %}
+				<div class="control">
+					<input class="input {% if error.email %}is-danger{% endif %}" type="email" name="email" placeholder="{{ 'example@example.com'|lang }}" id="register_email" required maxlength="64" value="{{ input.email }}" title="{{ 'Enter your email address'|lang }}">
+				</div>
+			</div>
+			<div class="field">
+				<label for="register_username" class="label has-text-light">{{ 'Username'|lang }}</label>
+				{% if error.username %}
+					<div class="notification is-danger">{{ error.username }}</div>
+				{% endif %}
+				<div class="control">
+					<input class="input {% if error.username %}is-danger{% endif %}" type="text" name="username" placeholder="{{ 'Username'|lang }}" id="register_username" required maxlength="64" value="{{ input.username }}" title="{{ 'Enter your username. Use only characters:'|lang }} a-z0-9-_" pattern="[a-z0-9-_]+">
+				</div>
+			</div>
+			<div class="field">
+				<label for="register_password" class="label has-text-light">{{ 'Password'|lang }}</label>
+				{% if error.password %}
+					<div class="notification is-danger">{{ error.password }}</div>
+				{% endif %}
+				<div class="control">
+					<input class="input {% if error.password %}is-danger{% endif %}" type="password" name="password" placeholder="****" id="register_password" required maxlength="32" value="{{ input.password }}" title="{{ 'Enter your password'|lang }}">
+				</div>
+			</div>
+			<div class="field">
+				<label for="register_password_repeat" class="label has-text-light">{{ 'Repeat password'|lang }}</label>
+				<div class="control">
+					<input class="input" type="password" name="password_repeat" placeholder="****" id="register_password_repeat" required maxlength="32" title="{{ 'Here repeat your password'|lang }}">
+				</div>
+			</div>
+			<div class="field">
+				<label for="register_captcha" class="label has-text-light">{{ 'Enter the code Captcha'|lang }}</label>
+				{% if error.captcha %}
+					<div class="notification is-danger">{{ error.captcha }}</div>
+				{% endif %}
+				<div class="control">
+					<img src="{{ path('captcha') }}" alt="captcha">
+					<input class="input {% if error.captcha %}is-danger{% endif %}" type="text" placeholder="abc123" title="{{ 'Enter the code Captcha'|lang }}" name="captcha" id="register_captcha" required maxlength="32">
+				</div>
+			</div>
+			{% if error.rules %}
+				<div class="notification is-danger">{{ error.rules }}</div>
+			{% endif %}
+			<div class="field">
+			  <div class="control">
+			    <label class="checkbox has-text-light">
+			      <input type="checkbox" name="rules" required {% if input.rules %}checked{% endif %}>
+			      {{ 'Accepts the terms and conditions and the privacy policy'|lang }}: <a href="{{ path('rules') }}" title="{{ 'Terms of service'|lang }}" target="_blank" class="has-text-white-ter">{{ 'Terms of service'|lang }}</a> - <a href="{{ path('privacy_policy') }}" title="{{ 'Privacy policy'|lang }}" target="_blank" class="has-text-white-ter">{{ 'Privacy policy'|lang }}</a>
+			    </label>
+			  </div>
+			</div>
+			<div class="field">
+				<div class="control">
+					<input type="submit" class="button is-light" value="{{ 'Register'|lang }}">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div id="reset_password" class="tabcontent" {% if tab_active!='reset_password' %}style="display: none"{% endif %}>
+		{% if form_new_password %}
+			<h1 class="is-size-2">{{ 'Enter a new password'|lang }}</h1><br>
+			<form method="post">
+				<input type="hidden" name="action" value="new_password">
+				<div class="field">
+					<div class="control">
+						<input class="input" type="text" disabled value="{{ form_new_password.username }}">
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<input class="input" type="email" disabled value="{{ form_new_password.email }}">
+					</div>
+				</div>
+				<div class="field">
+					<label for="new_password" class="label has-text-light">{{ 'Enter a new password'|lang }}</label>
+					<div class="control">
+						<input class="input" type="password" name="password" placeholder="****" id="new_password" title="{{ 'Enter here a new password'|lang }}" required value="{{ input.password }}" maxlength="32">
+					</div>
+				</div>
+				<div class="field">
+					<label for="new_password_repeat" class="label has-text-light">{{ 'Repeat new password'|lang }}</label>
+					<div class="control">
+						<input class="input" type="password" name="password_repeat" placeholder="****" id="new_password_repeat" title="{{ 'Repeat new password'|lang }}" required maxlength="32">
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<input type="submit" class="button is-light" value="{{ 'Change password'|lang }}">
+					</div>
+				</div>
+		{% else %}
+			<h1 class="is-size-2">{{ 'Reset password'|lang }}</h1><br>
+			<form method="post" action="{{ path('login') }}">
+				<input type="hidden" name="action" value="reset_password">
+				<div class="field">
+					<label for="reset_username" class="label has-text-light">{{ 'Username / email'|lang }}</label>
+					<div class="control has-icons-left">
+						<input class="input" type="text" name="username" placeholder="{{ 'example@example.com'|lang }}" id="reset_username" maxlength="64" required value="{{ post.username }}" title="{{ 'Enter your username or e-mail'|lang }}">
+					 	<span class="icon is-small is-left">
+						 	<i class="fas fa-user"></i>
+					 	</span>
+					</div>
+				</div>
+				<div class="field">
+					<label for="reset_captcha" class="label has-text-light">{{ 'Enter the code Captcha'|lang }}</label>
+					<div class="control">
+						<img src="{{ path('captcha') }}" alt="captcha">
+						<input class="input" type="text" placeholder="abc123" title="{{ 'Enter the code Captcha'|lang }}" name="captcha" id="reset_captcha" required maxlength="32" title="{{ 'Enter the code Captcha'|lang }}">
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<input type="submit" class="button is-light" value="{{ 'Reset password'|lang }}">
+					</div>
+				</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

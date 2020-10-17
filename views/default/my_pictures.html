@@ -1,0 +1,20 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+  <h1 class="is-size-2">{{ 'My pictures'|lang }}</h2><br>
+  {% include 'alert.tpl' %}
+  {% if pictures %}
+    {% include 'picture_list.tpl' %}
+    <br>
+    {% include 'pagination.tpl' %}
+  {% else %}
+      <h2 class="is-size-3 has-text-danger">{{ 'Nothing found'|lang }}</h2>
+  {% endif %}
+</div>
+</div>
+
+
+{% endblock %}

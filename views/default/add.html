@@ -1,0 +1,184 @@
+
+{% extends "main.tpl" %}
+
+{% block javascript %}
+  {{ parent() }}
+  {% if edit_picture %}
+    <script>
+      var is_edit_picture = is_added_image = true;
+      generatePicture();
+    </script>
+  {% else %}
+    <script>
+      var is_edit_picture = is_added_image = false;
+    </script>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="page_box">
+  <form method="post" enctype="multipart/form-data" id="form_add_picture">
+    <input type="hidden" name="filename" id="filename" value="{{ picture.filename }}">
+    {% if edit_picture %}
+      <input type="hidden" name="action" value="edit">
+      <input type="hidden" name="token" value="{{ generateToken('edit_picture') }}">
+    {% else %}
+      <input type="hidden" name="action" value="add">
+      <input type="hidden" name="token" value="{{ generateToken('add_picture') }}">
+    {% endif %}
+    <div class="columns">
+      <div class="column">
+        {% if edit_picture %}
+          <h1 class="is-size-2">{{ 'Edit picture'|lang }}: {{ picture.title }}</h1>
+        {% else %}
+           <h1 class="is-size-2">{{ 'Add new picture'|lang }}</h1>
+        {% endif %}
+        {% include 'alert.tpl' %}
+        <div class="field">
+          <label for="title" class="label has-text-light">{{ 'Title'|lang }}</label>
+          <div class="control">
+            <input id="title" name="title" type="text" placeholder="{{ 'Title'|lang }}" title="{{ 'Here enter title'|lang }}" class="input" required maxlength="{{ settings.number_char_title }}" value="{{ picture.title }}" onchange="generatePicture()">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <div class="select">
+              <select name="title_size" id="title_size" onchange="generatePicture()">
+                {% for item in title_sizes %}
+                  <option value="{{ item }}" {% if item==picture.title_size %}selected{% endif %}>{{ item }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.title_color }}" name="title_color" id="title_color" onchange="generatePicture()">
+            <div class="box_select_border">
+              <span>{{ 'Border'|lang }}:</span>
+              <div class="select">
+                <select name="title_border_size" id="title_border_size" onchange="generatePicture()">
+                  {% for item in title_border_sizes %}
+                    <option value="{{ item }}" {% if item==picture.title_border_size %}selected{% endif %}>{{ item }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.title_border_color }}" name="title_border_color" id="title_border_color" onchange="generatePicture()">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="description" class="label has-text-light">{{ 'Description'|lang }}</label>
+          <div class="control">
+            <textarea id="description" name="description" placeholder="{{ 'Description'|lang }}" title="{{ 'Here enter description'|lang }}" class="textarea" maxlength="{{ settings.number_char_description }}" onchange="generatePicture()">{{ picture.description }}</textarea>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <div class="select">
+              <select name="description_size" id="description_size" onchange="generatePicture()">
+                {% for item in description_sizes %}
+                  <option value="{{ item }}" {% if item==picture.description_size %}selected{% endif %}>{{ item }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.description_color }}" name="description_color" id="description_color" onchange="generatePicture()">
+            <div class="box_select_border">
+              <span>{{ 'Border'|lang }}:</span>
+              <div class="select">
+                <select name="description_border_size" id="description_border_size" onchange="generatePicture()">
+                  {% for item in description_border_sizes %}
+                    <option value="{{ item }}" {% if item==picture.description_border_size %}selected{% endif %}>{{ item }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.description_border_color }}" name="description_border_color" id="description_border_color" onchange="generatePicture()">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label has-text-light">{{ 'Type'|lang }}</label>
+          <div class="control">
+            <div class="select">
+              <select id="type" name="type" onchange="generatePicture();addChangeType()">
+                <option value="demot">{{ 'demot'|lang }}</option>
+                <option value="mem" {% if picture.type=='mem' or picture.type=='mem_pattern' %}selected{% endif %}>{{ 'mem'|lang }}</option>
+                {% if not edit_picture and mem_patterns %}<option value="mem_pattern" {% if picture.type=='mem_pattern' %}selected{% endif %}>{{ 'mem from pattern'|lang }}</option>{% endif %}
+              </select>
+            </div>
+          </div>
+        </div>
+        {% if not edit_picture and mem_patterns %}
+          <div class="field" id="mem_patterns" style="display:none;">
+            <label class="label has-text-light">{{ 'Memes patterns'|lang }}</label>
+            <div class="control">
+              {% for item in mem_patterns %}
+              <label class="radio mem_pattern">
+                <input type="radio" name="mem_pattern" value="{{ item.id }}" {% if loop.index == 1 %}checked{% endif %} onchange="is_added_image=false;generatePicture()">
+                <img src="upload/mem_pattern/{{ item.thumb }}">
+              </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        {% if not edit_picture %}
+          <div class="field" id="picture_file_box">
+            <label for="picture" class="label has-text-light">{{ 'Image from disk'|lang }}</label>
+            <div class="control">
+              <div class="file">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="picture" id="picture" required>
+                  <span class="file-cta">
+                    <span class="file-icon"><i class="fas fa-upload"></i></span>
+                    <span class="file-label">{{ 'Image from disk'|lang }}</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="field" id="demot_select_color" {% if picture.type=='mem' or picture.type=='mem_pattern' %}style="display:none;"{% endif %}>
+          <div class="control">
+            <div class="box_select_border">
+              <span>{{ 'Background color'|lang }}:</span>
+              <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.background_color }}" name="background_color" id="background_color" onchange="generatePicture()">
+              <span>{{ 'Border color'|lang }}:</span>
+              <input class="input" type="color" title="{{ 'Choose color'|lang }}" value="{{ picture.border_color }}" name="border_color" id="border_color" onchange="generatePicture()">
+            </div>
+          </div>
+        </div>
+        {% if categories %}
+          <div class="field">
+            <label class="label has-text-light" for="category_id">{{ 'Category'|lang }}</label>
+            <div class="control">
+              <div class="select">
+                <select id="category_id" name="category_id">
+                  <option value="">{{ '-- select --'|lang }}</option>
+                  {% for item in categories %}
+                    <option value="{{ item.id }}" {% if picture.category_id == item.id  %}selected{% endif %}>{{ item.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="field">
+          <label for="tags" class="label has-text-light">{{ 'Tags (enter after the comma)'|lang }}</label>
+          <div class="control">
+            <input class="input" id="tags" name="tags" type="text" placeholder="{{ 'Tags (enter after the comma)'|lang }}" title="{{ 'Tags (enter after the comma)'|lang }}" maxlength="512" value="{{ picture.tags }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="submit" class="button is-light" value="{% if edit_picture %}{{ 'Save'|lang }}{% else %}{{ 'Add'|lang }}{% endif %}">
+          </div>
+        </div>
+      </div>
+      <div class="column" style="position: relative">
+    		<div id="preview_picture_box">
+    			<h2 class="is-size-4">{{ 'Preview picture'|lang }}</h2><br>
+    			<img src="" id="preview_picture">
+    		</div>
+			<i class="fas fa-spinner fa-spinner-animate" id="preview_picture_load"></i>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+  {% include 'alert.tpl' %}
+  <div class="columns">
+    <div class="column has-text-right is-hidden-mobile">
+      <div class="ads_aside" id="ads_side_left">
+        {{ settings.ads_side_left|raw }}
+      </div>
+    </div>
+    <div id="pictures_box">
+      {% if page_header %}<h1 class="is-size-2 has-text-centered has-text-light">{{ page_header }}</h1><br>{% endif %}
+      {% if pictures %}
+          {% for picture in pictures %}
+              <div class="picture">
+                <a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}"><img data-src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}" class="lazy" src="views/{{ settings.template }}/images/loading.gif"></a>
+				{% if settings.show_title_desc %}
+					<h3 class="is-size-3"><a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}" class="has-text-light">{{ picture.title }}</a></h3>
+					<p>{{ picture.description|nl2br }}</p>
+				{% endif %}
+                <div class="set_voice_outside is-size-4">
+                  <div class="set_voice_box">
+                    <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-plus-square"></i></a>
+                    <span class="voice_plus">{{ picture.voices_plus }}</span>
+                  </div>
+                  <div class="set_voice_box">
+                    <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="-1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-minus-square"></i></a>
+                    <span class="voice_minus">{{ picture.voices_minus }}</span>
+                  </div>
+                </div>
+                <p class="picture_data">{% if picture.waiting_room %}<a href="{{ path('waiting_room') }}" title="{{ 'Waiting Room'|lang }}" class="has-text-white-ter">{{ 'Waiting Room'|lang }}</a> • {% endif %}{% if picture.category %}<a href="{{ path('category',picture.category_id,picture.category.slug) }}" title="{{ 'Category'|lang }}: {{ picture.category.name }}" class="has-text-white-ter">{{ picture.category.name }}</a> • {% endif %}{% if picture.username %}{{ 'Author'|lang }}: <a href="{{ path('profile',picture.user_id,picture.username) }}" title="{{ 'Profile of'|lang }}: {{ picture.username }}" class="has-text-white-ter">{{ picture.username }}</a> • {% endif %}{{ 'View count'|lang }}: <span title="{{ 'all'|lang }}">{{ picture.view_all }}</span>&nbsp;/&nbsp;<span title="{{ 'unique'|lang }}">{{ picture.view_unique|default(0) }}</span> • {{ 'Added'|lang }}: {{ picture.date|date('Y-m-d') }}</p>
+                {% if ads[loop.index] %}
+                  <div class="ads">
+                    {{ ads[loop.index].code|raw }}
+                  </div>
+                {% endif %}
+            </div>
+          {% endfor %}
+          {% include 'pagination.tpl' %}
+      {% else %}
+          <h2 class="is-size-3 has-text-centered has-text-danger">{{ 'Nothing found'|lang }}</h2>
+      {% endif %}
+    </div>
+    <div class="column is-hidden-mobile">
+      <div class="ads_aside" id="ads_side_right">
+        {{ settings.ads_side_right|raw }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

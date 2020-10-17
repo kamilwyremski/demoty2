@@ -1,0 +1,64 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+		<h1 class="is-size-2">{{ 'Settings'|lang }}</h1>
+		<h2 class="is-size-4">{{ 'Here you can edit your account data'|lang }}</h2>
+		<br>
+		<div class="columns">
+			<div class="column">
+				<h3 class="is-size-4">{{ 'Statistics'|lang }}</h3><br>
+				<table class="table is-bordered is-striped">
+					<tr><td>{{ 'Username'|lang }}:</td><td><a href="{{ path('profile',0,user.username) }}" title="{{ user.username }}" class="has-text-dark">{{ user.username }}</a></td></tr>
+					<tr><td>{{ 'E-mail address'|lang }}:</td><td>{{ user.email }}</td></tr>
+					<tr><td>{{ 'Number of pictures'|lang }}:</td><td>{{ user.number_files }}</td></tr>
+					<tr><td>{{ 'In Waiting Room'|lang }}:</td><td>{{ user.number_files_waiting_room }}</td></tr>
+					<tr><td>{{ 'Date of registration'|lang }}:</td><td>{{ user.date|date("d-m-Y") }}</td></tr>
+					<tr><td>{{ 'Number of logins'|lang }}:</td><td>{{ user.number_login }}</td></tr>
+					{% if user.last_login %}
+						<tr><td>{{ 'Last login'|lang }}:</td><td>{{ user.last_login|date("d-m-Y") }} / {{ user.last_login|date("H:i") }}</td></tr>
+					{% endif %}
+					{% if user.last_reset_password %}
+						<tr><td>{{ 'Last reset password'|lang }}:</td><td>{{ user.last_reset_password|date("d-m-Y") }} / {{ user.last_reset_password|date("H:i") }}</td></tr>
+					{% endif %}
+				</table>
+			</div>
+			<div class="column">
+				<h3 class="is-size-4">{{ 'Password change'|lang }}</h3><br>
+				{% include 'alert.tpl' %}
+				<form method="post">
+					<input type="hidden" name="action" value="change_password">
+					<input type="hidden" name="token" value="{{ generateToken('change_password') }}">
+					<div class="field">
+						<label for="old_password" class="label has-text-light">{{ 'Old password'|lang }}</label>
+						<div class="control">
+							<input class="input" type="password" class="form-control" name="old_password" placeholder="****" id="old_password" maxlength="32" required title="{{ 'Old password'|lang }}">
+						</div>
+					</div>
+					<div class="field">
+						<label for="new_password" class="label has-text-light">{{ 'New password'|lang }}</label>
+						<div class="control">
+							<input class="input" type="password" class="form-control" name="new_password" placeholder="****" id="new_password" maxlength="32" required title="{{ 'New password'|lang }}">
+						</div>
+					</div>
+					<div class="field">
+						<label for="repeat_new_password" class="label has-text-light">{{ 'Repeat new password'|lang }}</label>
+						<div class="control">
+							<input class="input" type="password" class="form-control" name="repeat_new_password" placeholder="****" id="repeat_new_password" maxlength="32" required title="{{ 'Repeat new password'|lang }}">
+						</div>
+					</div>
+					<div class="field">
+						<div class="control">
+							<input type="submit" class="button is-light" value="{{ 'Save'|lang }}">
+						</div>
+					</div>
+				</form>
+				<br><br>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

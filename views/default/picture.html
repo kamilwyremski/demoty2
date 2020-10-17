@@ -1,0 +1,119 @@
+
+{% extends "main.tpl" %}
+
+{% block content %}
+
+<div class="page_box">
+  {% include 'alert.tpl' %}
+  <div class="columns">
+    <div class="column has-text-right is-hidden-mobile">
+      <div class="ads_aside" id="ads_side_left">
+        {{ settings.ads_side_left|raw }}
+      </div>
+    </div>
+    <div id="pictures_box">
+      <div class="picture">
+        <img src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}">
+        <h1 class="is-size-2">{{ picture.title }}</h1>
+		<p>{{ picture.description|nl2br }}</p>
+        <div class="set_voice_outside is-size-4">
+          <div class="set_voice_box">
+            <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-plus-square"></i></a>
+            <span class="voice_plus">{{ picture.voices_plus }}</span>
+          </div>
+          <div class="set_voice_box">
+            <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="-1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-minus-square"></i></a>
+            <span class="voice_minus">{{ picture.voices_minus }}</span>
+          </div>
+        </div>
+        <p class="picture_data">{% if picture.waiting_room %}<a href="{{ path('waiting_room') }}" title="{{ 'Waiting Room'|lang }}" class="has-text-white-ter">{{ 'Waiting Room'|lang }}</a> • {% endif %}{% if picture.category %}<a href="{{ path('category',picture.category_id,picture.category.slug) }}" title="{{ 'Category'|lang }}: {{ picture.category.name }}" class="has-text-white-ter">{{ picture.category.name }}</a> • {% endif %}{% if picture.username %}{{ 'Author'|lang }}: <a href="{{ path('profile',picture.user_id,picture.username) }}" title="{{ 'Profile of'|lang }}: {{ picture.username }}" class="has-text-white-ter">{{ picture.username }}</a> • {% endif %}{{ 'View count'|lang }}: <span title="{{ 'all'|lang }}">{{ picture.view_all }}</span>&nbsp;/&nbsp;<span title="{{ 'unique'|lang }}">{{ picture.view_unique|default(0) }}</span> • {{ 'Added'|lang }}: {{ picture.date|date('Y-m-d') }}</p>
+        {% if picture.tags %}
+          <p>{{ 'Tags'|lang }}: {% for item in picture.tags %}<a href="{{ path('tag',0,item.slug) }}" title="{{ 'Tag'|lang }}: {{ item.name }}" class="has-text-white-ter">{{ item.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+        {% endif %}
+        <div class="picture_social">
+          {% if settings.social_facebook %}
+    				<div class="button_social" style="margin-top:2px">
+    					<div class="fb-like" data-href="{{ path('picture',picture.id,picture.slug) }}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+    				</div>
+          {% endif %}
+          {% if settings.social_pinterest %}
+    				<div class="button_social" style="margin-top:2px">
+    					<a href="//www.pinterest.com/pin/create/button/?url={{ path('picture',picture.id,picture.slug) }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
+    					<script async src="//assets.pinterest.com/js/pinit.js"></script>
+    				</div>
+    			{% endif %}
+			    {% if settings.social_twitter %}
+				    <div class="button_social">
+					    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ path('picture',picture.id,picture.slug) }}" data-lang="pl">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				    </div>
+    			{% endif %}
+    			{% if settings.social_wykop %}
+    				<div class="button_social">
+    					<script>
+    						var wykop_url=location.href;
+    						var wykop_title=encodeURIComponent(document.title);
+    						var wykop_desc=encodeURIComponent('{{ picture.description }}');
+    						var widget_bg='FFFFFF';
+    						var widget_type='compact2';
+    						var widget_bold=true;
+    						var widget_url='https://www.wykop.pl/dataprovider/diggerwidget/?url='+encodeURIComponent("{{ path('file',picture.id,picture.slug) }}")+'&title='+(wykop_title)+'&desc='+(wykop_desc)+'&bg='+(widget_bg)+'&type='+(widget_type)+'&bold='+(widget_bold);
+    						document.write('<div><iframe src="'+widget_url+'" style="border:none;width:100px;height:20px;overflow:hidden;margin:0;padding:0;" frameborder="0" border="0"></iframe></div>');
+    					</script>
+    				</div>
+    			{% endif %}
+        </div>
+        {% if settings.allow_comments_fb_picture %}
+          <div class="fb-comments" data-href="{{ path('picture',picture.id,picture.slug) }}" data-width="100%" data-colorscheme="dark"></div>
+        {% endif %}
+        {% if picture.user_id==user.id or user.moderator %}
+          <br>
+          <a class="button is-small" href="{{ path('edit',picture.id,picture.slug) }}">{{ 'Edit'|lang }}</a>
+          {% if user.moderator and picture.waiting_room %}
+            <a href="#modal_main_page" class="button is-small modal_trigger is-success">{{ 'Add to Main Page'|lang }}</a>
+            <div class="modal" id="modal_main_page">
+              <div class="modal-background"></div>
+              <form method="post">
+                <input type="hidden" name="action" value="set_main_page">
+                <input type="hidden" name="id" value="{{ picture.id }}">
+                <input type="hidden" name="token" value="{{ generateToken('set_main_page') }}">
+                <div class="modal-content box">
+                  <h4 class="is-size-4">{{ 'Add to Main Page'|lang }}: {{ picture.title }}</h4>
+                  <div class="has-text-right">
+                    <input type="submit" class="button" value="{{ 'Execute'|lang }}">
+                  </div>
+                </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+              </form>
+            </div>
+          {% endif %}
+          <a href="#modal_remove" class="button is-small modal_trigger is-danger">{{ 'Remove'|lang }}</a>
+          <div class="modal" id="modal_remove">
+            <div class="modal-background"></div>
+            <form method="post">
+              <input type="hidden" name="action" value="remove_picture">
+              <input type="hidden" name="id" value="{{ picture.id }}">
+              <input type="hidden" name="token" value="{{ generateToken('remove_picture') }}">
+              <div class="modal-content box">
+                <h4 class="is-size-4">{{ 'Delete picture'|lang }}: {{ picture.title }}</h4>
+                <p>{{ 'Are you sure you want to delete picture'|lang }}: "{{ picture.title }}"?</p>
+                <div class="has-text-right">
+                  <input type="submit" class="button is-danger" value="{{ 'Execute'|lang }}">
+                </div>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </form>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="column is-hidden-mobile">
+      <div class="ads_aside" id="ads_side_right">
+        {{ settings.ads_side_right|raw }}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
