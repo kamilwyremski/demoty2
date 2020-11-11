@@ -209,7 +209,7 @@ class user {
 					}
 				}
 				$old_username = $data['username'];
-				$data['username'] = slug(strip_tags($data['username']));
+				$data['username'] = slugWithUpper(strip_tags($data['username']));
 				if(!$data['username'] or strlen($data['username'])>64 or $old_username!=$data['username']){
 					$error['username'] = lang('Invalid username.');
 				}else{
@@ -343,7 +343,7 @@ class user {
 	public function completeData($code,$data){
 		global $db, $settings;
 		$old_username = $data['username'];
-		$data['username'] = slug(strip_tags($data['username']));
+		$data['username'] = slugWithUpper(strip_tags($data['username']));
 		if(!$data['username'] or strlen($data['username'])>64 or $old_username!=$data['username']){
 			$error = lang('Invalid username.');
 		}else{

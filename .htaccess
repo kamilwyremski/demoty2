@@ -24,7 +24,7 @@ RewriteRule ^([0-9]+)-([a-z0-9-_]+)/?$ index.php?controller=picture&id=$1&slug=$
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-z0-9-_]+)/([a-z0-9-_]+)/?$ index.php?controller=$1&slug=$2 [NC,QSA,L]
+RewriteRule ^([a-z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ index.php?controller=$1&slug=$2 [NC,QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

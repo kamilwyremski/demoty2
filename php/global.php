@@ -336,10 +336,31 @@ function webAddress($address){
 	return $address;
 }
 
-function slug($string){
-	$string = strtolower(str_replace(array(' ','.','%','$',':','–',',','/','=','?','Ę','Ó','Ą','Ś','Ł','Ż','Ź','Ć','Ń','ę','ó','ą','ś','ł','ż','ź','ć','ń'), array('-','-','-','','','','','','','','E','O','A','S','L','Z','Z','C','N','e','o','a','s','l','z','z','c','n'), $string));
-	$string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
-	$string = preg_replace('/[^a-z0-9-_]+/', '', $string);
+function slug(string $string){
+	return strtolower(slugWithUpper($string));
+}
+
+function slugWithUpper(string $string){
+	$cyr = [
+      'а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п',
+      'р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я',
+      'А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П',
+      'Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я'
+	];
+	$lat = [
+		'a','b','v','g','d','e','io','zh','z','i','y','k','l','m','n','o','p',
+		'r','s','t','u','f','h','ts','ch','sh','sht','a','i','y','e','yu','ya',
+		'A','B','V','G','D','E','Io','Zh','Z','I','Y','K','L','M','N','O','P',
+		'R','S','T','U','F','H','Ts','Ch','Sh','Sht','A','I','Y','e','Yu','Ya'
+	];
+	$string = str_replace($cyr, $lat, $string);
+	$string = trim(str_replace([' ','&','%','$',':',',','/','=','?','Ę','Ó','Ą','Ś','Ł','Ż','Ź','Ć','Ń','ę','ó','ą','ś','ł','ż','ź','ć','ń'], ['-','-','-','','','','','','','E','O','A','S','L','Z','Z','C','N','e','o','a','s','l','z','z','c','n'], $string));
+	$string = preg_replace("/[^a-zA-Z0-9-_]+/", "", $string);
+	$string = trim($string,'-');
+	do{
+		$string_old = $string;
+		$string = str_replace("--", "-", $string);
+	}while($string != $string_old);
 	return $string;
 }
 
