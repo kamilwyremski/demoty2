@@ -1,4 +1,4 @@
-# demoty2
+# Skrypt Demoty2
 Skrypt strony z demotywatorami Demoty2
 
 Demo skryptu: https://demoty2.itworksbetter.net/
