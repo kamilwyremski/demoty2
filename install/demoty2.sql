@@ -338,7 +338,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('facebook_side_panel', ''),
 ('favicon', '/upload/images/favicon.png'),
 ('footer_bottom', '<p style=\"text-align: center;\">Wszelkie obrazki i filmy na stronie są dodawane przez użytkownik&oacute;w serwisu i jego właściciel nie bierze za nie odpowiedzialności.</p>\r\n'),
-('footer_text', 'Web script Demoty2.5 &copy; Project 2018 - 2020 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a>'),
+('footer_text', 'Web script Demoty2.6 &copy; Project 2018 - 2020 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a>'),
 ('footer_top', '<p>DEMOTY2 to nowoczesny skrypt dla stron internetowych z demotywatorami. Umożliwia tworzenie i edycję własnych demotywator&oacute;w, głosowanie na nie oraz dodawanie komentarzy.</p>\r\n\r\n<p>Do skryptu dołączony jest Panel Administratora umożliwiający łatwą edycję ustawień strony.&nbsp;<br />\r\nPanel jest dostępny pod adresem: <a href=\"http://demoty2.itworksbetter.net/admin\" target=\"_blank\">http://itworksbetter.net/admin</a><br />\r\nLogin: test<br />\r\nHasło: 1234</p>\r\n'),
 ('generate_sitemap', '1'),
 ('google_id', ''),

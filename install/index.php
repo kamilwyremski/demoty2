@@ -135,7 +135,7 @@ define("_DB_PREFIX_", "'._DB_PREFIX_.'");
 
 			chmod("../config/db.php", 0644);
 
-			header('location: /admin');
+			header('location: '.webAddress($_POST['base_url']));
 			die('redirect...');
 		}
 	}
