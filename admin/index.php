@@ -17,17 +17,14 @@ header('X-Frame-Options: SAMEORIGIN');
 
 session_start();
 
-require_once('../vendor/autoload.php');
+require_once('../config/config.php');
+
 $loader = new Twig_Loader_Filesystem('views');
 $twig = new Twig_Environment($loader, [
     'cache' => 'tmp',
 ]);
 $twig->addFilter(new Twig_Filter('lang', 'lang'));
-$twig->addFilter(new Twig_Filter('showCurrency', 'showCurrency'));
 $twig->addFunction(new Twig_Function('path', 'path'));
-
-require_once('../config/config.php');
-require_once('php/admin.class.php');
 
 $admin = new admin();
 
