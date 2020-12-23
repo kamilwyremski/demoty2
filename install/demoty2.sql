@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `mail_queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `receiver` varchar(64) NOT NULL,
   `action` varchar(32) NOT NULL,
-  `data` text NOT NULL,
+  `data` LONGTEXT NOT NULL,
   `priority` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
