@@ -19,12 +19,12 @@ session_start();
 
 require_once('../config/config.php');
 
-$loader = new Twig_Loader_Filesystem('views');
-$twig = new Twig_Environment($loader, [
+$loader = new \Twig\Loader\FilesystemLoader('views');
+$twig = new \Twig\Environment($loader, [
     'cache' => 'tmp',
 ]);
-$twig->addFilter(new Twig_Filter('lang', 'lang'));
-$twig->addFunction(new Twig_Function('path', 'path'));
+$twig->addFilter(new \Twig\TwigFilter('lang', 'lang'));
+$twig->addFunction(new \Twig\TwigFunction('path', 'path'));
 
 $admin = new admin();
 

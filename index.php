@@ -18,13 +18,14 @@ header('X-Frame-Options: SAMEORIGIN');
 
 require_once('config/config.php');
 
-$loader = new Twig_Loader_Filesystem('views/'.$settings['template']);
-$twig = new Twig_Environment($loader, array(
+$loader = new \Twig\Loader\FilesystemLoader('views/'.$settings['template']);
+$twig = new \Twig\Environment($loader, [
     'cache' => 'tmp',
-));
-$twig->addFilter(new Twig_Filter('lang', 'lang'));
-$twig->addFunction(new Twig_Function('path', 'path'));
-$twig->addFunction(new Twig_Function('generateToken', 'generateToken'));
+]);
+
+$twig->addFilter(new \Twig\TwigFilter('lang', 'lang'));
+$twig->addFunction(new \Twig\TwigFunction('path', 'path'));
+$twig->addFunction(new \Twig\TwigFunction('generateToken', 'generateToken'));
 
 $controller = 'index';
 if(isset($_GET['controller']) and isSlug($_GET['controller'])){
