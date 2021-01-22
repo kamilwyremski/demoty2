@@ -337,7 +337,14 @@ function webAddress($address){
 }
 
 function slug(string $string){
-	return strtolower(slugWithUpper($string));
+	$slug = strtolower(slugWithUpper($string));
+	if(strlen($slug)){
+		return $slug;
+	}elseif(strlen($string)){
+		return '-';
+	}else{
+		return '';
+	}
 }
 
 function slugWithUpper(string $string){
