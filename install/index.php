@@ -17,8 +17,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 ob_start();
 
-if(phpversion()<7.1){
-	die('Wrong version of PHP on the server. The minimum supported is 7.1');
+if(phpversion()<7.2){
+	die('Wrong version of PHP on the server. The minimum supported is 7.2');
 }
 
 if(!is_writable('../config/db.php')){
@@ -92,7 +92,7 @@ define("_DB_PREFIX_", "'._DB_PREFIX_.'");
 
 			$db->exec($sql);
 
-			include('../admin/php/admin.class.php');
+			include('../class/admin.class.php');
 			$admin = new admin();
 			$password_admin = $admin->createPassword($_POST['password_admin']);
 
