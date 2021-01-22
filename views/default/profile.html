@@ -23,7 +23,7 @@
 			{% if settings.allow_comments_fb_profile %}
 				<br>
 				<h3 class="is-size-4">{{ 'Comments'|lang }}</h3>
-				<div class="fb-comments" data-href="{{ path('profile',0,profile.username) }}" data-width="100%" data-colorscheme="dark"></div>
+				<div class="fb-comments has-background-light" data-href="{{ path('profile',0,profile.username) }}" data-width="100%" data-colorscheme="dark" data-lazy="true"></div>
 			{% endif %}
 		</div>
 		{% if settings.show_contact_form_profile %}
