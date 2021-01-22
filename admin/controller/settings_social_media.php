@@ -33,6 +33,9 @@ if($admin->is_logged()){
 		$sth->bindValue(':value', isset($_POST['social_wykop']), PDO::PARAM_INT);
 		$sth->bindValue(':name', 'social_wykop', PDO::PARAM_STR);
 		$sth->execute();
+		$sth->bindValue(':value', isset($_POST['social_whatsapp']), PDO::PARAM_INT);
+		$sth->bindValue(':name', 'social_whatsapp', PDO::PARAM_STR);
+		$sth->execute();
 		$sth->bindValue(':value', $_POST['url_facebook'], PDO::PARAM_STR);
 		$sth->bindValue(':name', 'url_facebook', PDO::PARAM_STR);
 		$sth->execute();

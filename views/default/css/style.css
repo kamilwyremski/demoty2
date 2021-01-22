@@ -59,8 +59,8 @@ strong{
 .picture_social{
 	margin: 10px 0;
 }
-.button_social{
-	display: inline-block; vertical-align: top; margin: 7px;
+.picture_social a{
+	margin: 5px;
 }
 .picture_list img{
 	width: 150px;

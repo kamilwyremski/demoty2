@@ -31,40 +31,26 @@
           <p>{{ 'Tags'|lang }}: {% for item in picture.tags %}<a href="{{ path('tag',0,item.slug) }}" title="{{ 'Tag'|lang }}: {{ item.name }}" class="has-text-white-ter">{{ item.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
         {% endif %}
         <div class="picture_social">
+          <span class="has-text-white-ter">{{ 'Share'|lang }}: </span> 
           {% if settings.social_facebook %}
-    				<div class="button_social" style="margin-top:2px">
-    					<div class="fb-like" data-href="{{ path('picture',picture.id,picture.slug) }}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
-    				</div>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ path('picture',picture.id,picture.slug) }}" title="{{ 'Share'|lang }} Facebook" rel="nofollow noopener" target="_blank"><i class="fab fa-facebook"></i></a>
+          {% endif %}
+          {% if settings.social_twitter %}
+            <a href="https://twitter.com/intent/tweet?text={{ picture.title }} {{ path('picture',picture.id,picture.slug) }}" title="{{ 'Share'|lang }} Twitter" rel="nofollow noopener" target="_blank"><i class="fab fa-twitter"></i></a>
           {% endif %}
           {% if settings.social_pinterest %}
-    				<div class="button_social" style="margin-top:2px">
-    					<a href="//www.pinterest.com/pin/create/button/?url={{ path('picture',picture.id,picture.slug) }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a>
-    					<script async src="//assets.pinterest.com/js/pinit.js"></script>
-    				</div>
-    			{% endif %}
-			    {% if settings.social_twitter %}
-				    <div class="button_social">
-					    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ path('picture',picture.id,picture.slug) }}" data-lang="pl">Tweet</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-				    </div>
-    			{% endif %}
-    			{% if settings.social_wykop %}
-    				<div class="button_social">
-    					<script>
-    						var wykop_url=location.href;
-    						var wykop_title=encodeURIComponent(document.title);
-    						var wykop_desc=encodeURIComponent('{{ picture.description }}');
-    						var widget_bg='FFFFFF';
-    						var widget_type='compact2';
-    						var widget_bold=true;
-    						var widget_url='https://www.wykop.pl/dataprovider/diggerwidget/?url='+encodeURIComponent("{{ path('file',picture.id,picture.slug) }}")+'&title='+(wykop_title)+'&desc='+(wykop_desc)+'&bg='+(widget_bg)+'&type='+(widget_type)+'&bold='+(widget_bold);
-    						document.write('<div><iframe src="'+widget_url+'" style="border:none;width:100px;height:20px;overflow:hidden;margin:0;padding:0;" frameborder="0" border="0"></iframe></div>');
-    					</script>
-    				</div>
-    			{% endif %}
+            <a href="https://pinterest.com/pin/create/button/?url={{ path('picture',picture.id,picture.slug) }}&media={{ settings.logo_facebook }}" title="{{ 'Share'|lang }} Pinterest" rel="nofollow noopener" target="_blank"><i class="fab fa-pinterest"></i></a>
+          {% endif %}
+          {% if settings.social_wykop %}
+            <a href="https://www.wykop.pl/dodaj/link/?url={{ path('picture',picture.id,picture.slug) }}&title={{ picture.title }}" title="{{ 'Share'|lang }} Wykop" rel="nofollow noopener" target="_blank"><i class="fas fa-share-alt"></i></a>
+          {% endif %}
+          {% if settings.social_whatsapp %}
+            <a href="whatsapp://send?text={{ path('picture',picture.id,picture.slug) }}" data-action="share/whatsapp/share" title="{{ 'Share'|lang }} WhatsApp" rel="nofollow noopener" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          {% endif %}
         </div>
         {% if settings.allow_comments_fb_picture %}
-          <div class="fb-comments" data-href="{{ path('picture',picture.id,picture.slug) }}" data-width="100%" data-colorscheme="dark"></div>
+          <div class="fb-comments has-background-light" data-href="{{ path('picture',picture.id,picture.slug) }}" data-width="100%" data-colorscheme="dark" data-lazy="true"></div>
+          <br>
         {% endif %}
         {% if picture.user_id==user.id or user.moderator %}
           <br>
