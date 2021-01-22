@@ -1,6 +1,6 @@
 <?php
 /************************************************************************
- * The script of website with demotivators DEMOTY2.6
+ * The script of website with demotivators DEMOTY 2.6.1
  * Copyright (c) 2018 - 2021 by IT Works Better https://itworksbetter.net
  * Project by Kamil Wyremski https://wyremski.pl
  *
@@ -28,7 +28,8 @@ $twig->addFunction(new \Twig\TwigFunction('path', 'path'));
 $twig->addFunction(new \Twig\TwigFunction('generateToken', 'generateToken'));
 
 $controller = 'index';
-if(isset($_GET['controller']) and isSlug($_GET['controller'])){
+
+if(isset($_GET['controller'])){
 	$controller = array_search($_GET['controller'], $links);
 	if($controller==''){
 		if($_GET['controller']=='picture'){
@@ -56,5 +57,6 @@ if(!empty($_GET['q'])){
 }
 
 $settings['logo_facebook'] = getFullUrl($settings['logo_facebook']);
+$settings['this_url'] = $settings['base_url'].$_SERVER['REQUEST_URI'];
 
 echo $twig->render($controller.'.html', array_merge($render_variables, array('settings' => $settings, 'user' => $user->user_data, 'controller'=>$controller)));

@@ -24,6 +24,7 @@
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="{{ settings.title }}">
 	<meta property="og:locale" content="{{ settings.facebook_lang }}">
+	<meta property="og:url" content="{{ settings.this_url }}">
 	{% if settings.facebook_api %}<meta property="fb:app_id" content="{{ settings.facebook_api }}">{% endif %}
 
 	<!-- other -->
@@ -134,9 +135,6 @@
 <footer class="footer has-background-black has-text-grey-light">
 	<div class="content">
 		{{ settings.footer_bottom|raw}}
-    <div class="has-text-centered">
-  		<small>{{ settings.footer_text|raw }}</small>
-    </div>
 	</div>
 </footer>
 
