@@ -173,7 +173,6 @@
 {% endif %}
 
 {% block javascript %}
-	<script src="views/{{ settings.template }}/js/lazyload.min.js"></script>
 	<script src="views/{{ settings.template }}/js/engine.js"></script>
 
 	{% if settings.facebook_side_panel or settings.social_facebook or allow_comments_fb_picture or allow_comments_fb_profile %}

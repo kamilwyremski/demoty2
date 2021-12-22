@@ -5,7 +5,7 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}"><img data-src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}" class="lazy" src="views/{{ settings.template }}/images/loading.gif"></a>
+            <a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}"><img src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}" loading="lazy"></a>
           </div>
           <div class="media-content">
             <h2 class="title is-size-4"><a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}" class="has-text-dark">{{ picture.title }}</a></h2>

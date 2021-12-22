@@ -16,7 +16,7 @@
       {% if pictures %}
           {% for picture in pictures %}
               <div class="picture">
-                <a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}"><img data-src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}" class="lazy" src="views/{{ settings.template }}/images/loading.gif"></a>
+                <a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}"><img src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}" loading="lazy"></a>
 				{% if settings.show_title_desc %}
 					<h3 class="is-size-3"><a href="{{ path('picture',picture.id,picture.slug) }}" title="{{ picture.title }}" class="has-text-light">{{ picture.title }}</a></h3>
 					<p>{{ picture.description|nl2br }}</p>

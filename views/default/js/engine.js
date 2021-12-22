@@ -1,8 +1,4 @@
 
-var lazyLoadInstance = new LazyLoad({
-    elements_selector: ".lazy"
-});
-
 function adsSide() {
   var scrolledInput = (document.body.scrollTop || document.documentElement.scrollTop) - 60;
   var picturesDom = document.getElementById("pictures_box");
