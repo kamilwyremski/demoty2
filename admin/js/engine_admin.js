@@ -1,7 +1,7 @@
 ﻿$(document).ready(function(){
 
 	function set_required(object){
-		$target = $('.'+object.data('target'));
+		const $target = $('.'+object.data('target'));
 		if (object.is(':checked')) {
 			$target.prop('required', true);
 		}else{
@@ -17,7 +17,7 @@
 	})
 
 	$('.select_checkbox').click(function(){
-		$this = $(this);
+		const $this = $(this);
 		if ($this.is(':checked')) {
 			$this.parents('.parent_select_checkbox').find('input[type=checkbox]').prop('checked', true);
 		}else{
@@ -30,30 +30,31 @@
 	})
 
 	$(".ajax").not('.inactive').click(function(){
-		var mydata = $(this).data();
+		const mydata = $(this).data();
 		$.post('php/ajax.php', {
 			'data' : mydata,
 			'send': 'ok'},
-			function(data) {
+			function() {
 				window.location.href = window.location;
-		});
-        return false;
-    });
+			}
+		);
+		return false;
+	});
 
 	$(".ajax_confirm").not('inactive').click(function(){
-		$this = $(this);
-		var is_confirmed = confirm($this.data('title'));
+		const $this = $(this);
+		const is_confirmed = confirm($this.data('title'));
 		if (is_confirmed) {
 			var mydata = $this.data();
 			$.post('php/ajax.php', {
 				'data' : mydata,
 				'send': 'ok'},
-				function(data) {
+				function() {
 					window.location.href = window.location;
 			});
 		}
-        return false;
-    });
+    return false;
+  });
 })
 
 $(document).on('click', '.open_roxy', function(){
@@ -68,17 +69,17 @@ $(document).on('hidden.bs.modal', '.modal', function () {
 });
 
 function closeRoxySelectFile(){
-	$roxy_target = $('.roxy_target');
+	const $roxy_target = $('.roxy_target');
 	$("[name='"+$roxy_target.data('roxy_name')+"']").val($roxy_target.attr('src'));
 	$('#roxySelectFile').modal('hide');
 }
 
 function run_ckeditor(id,height=200){
-	var roxyFileman = 'js/ckeditor/fileman/index.php';
+	const roxyFileman = 'js/ckeditor/fileman/index.php';
 	$(function(){
 		CKEDITOR.replace( id,{height: height,
-			filebrowserBrowseUrl:roxyFileman,
-			filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+			filebrowserBrowseUrl: roxyFileman,
+			filebrowserImageBrowseUrl: roxyFileman+'?type=image',
 			removeDialogTabs: 'link:upload;image:upload'});
 	});
 }

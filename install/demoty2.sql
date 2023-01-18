@@ -337,7 +337,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('facebook_secret', ''),
 ('facebook_side_panel', ''),
 ('favicon', '/upload/images/favicon.png'),
-('footer_bottom', '<p style=\"text-align: center;\">Wszelkie obrazki i filmy na stronie są dodawane przez użytkownik&oacute;w serwisu i jego właściciel nie bierze za nie odpowiedzialności.</p>\r\n<p class=\"has-text-centered\"><small>Web script Demoty2.7 &copy; Project 2018 - 2022 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a></small></p>'),
+('footer_bottom', '<p style=\"text-align: center;\">Wszelkie obrazki i filmy na stronie są dodawane przez użytkownik&oacute;w serwisu i jego właściciel nie bierze za nie odpowiedzialności.</p>\r\n<p class=\"has-text-centered\"><small>Web script Demoty2.7.1 &copy; Project 2018 - 2023 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a></small></p>'),
 ('footer_top', '<p>DEMOTY2 to nowoczesny skrypt dla stron internetowych z demotywatorami. Umożliwia tworzenie i edycję własnych demotywator&oacute;w, głosowanie na nie oraz dodawanie komentarzy.</p>\r\n\r\n<p>Do skryptu dołączony jest Panel Administratora umożliwiający łatwą edycję ustawień strony.&nbsp;<br />\r\nPanel jest dostępny pod adresem: <a href=\"https://demoty2.itworksbetter.net/admin\" target=\"_blank\">https://itworksbetter.net/admin</a><br />\r\nLogin: test<br />\r\nHasło: 1234</p>\r\n'),
 ('generate_sitemap', '1'),
 ('google_id', ''),
@@ -357,7 +357,9 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('number_char_title', '256'),
 ('rss', '1'),
 ('rodo_alert', ''),
-('rodo_alert_text', '<p>Szanowny użytkowniku,<br />\r\npragniemy Cię poinformować, że nasz serwis internetowy może personalizować treści marketingowe do Twoich potrzeb. W związku z tym danymi osobowymi, kt&oacute;re przetwarzamy są np. Tw&oacute;j adres IP, dane pozyskiwane na podstawie plik&oacute;w cookies lub podobnych mechanizm&oacute;w na Twoim urządzeniu o ile pozwolą one na zidentyfikowanie Ciebie.&nbsp;<br />\r\nJeżeli klikniesz przycisk &bdquo;Wyrażam zgodę na przetwarzanie moich danych osobowych&rdquo; lub zamkniesz to okno, to wyrazisz zgodę na przetwarzanie Twoich danych przez właściciela witryny i jego zaufanych partner&oacute;w.<br />\r\nWyrażenie zgody jest dobrowolne. Masz prawo do: dostępu do Twoich danych, ich sprostowania oraz usunięcia. Więcej informacji odnośnie przetwarzania danych osobowych znajdziesz w naszej <a href=\"/info/1,polityka-prywatnosci\">Polityce Prywatności.</a></p>\r\n\r\n<p>Lista zaufanych partner&oacute;w:<br />\r\nGoogle - na stronie są zamieszczone kody reklam Adsense oraz Google Analytics, kt&oacute;re mają na celu wyświetlanie spersonalizowanych treści oraz zbieranie informacji o zachowaniu użytkownika w celu poprawy strony.<br />\r\nFacebook - na stronie zamieszczony jest kod Facebook mający na celu wyświetlanie boksu z komentarzami oraz panelu bocznego.</p>\r\n'),
+('rodo_alert_text', '<p>Szanowny użytkowniku,<br />pragniemy Cię poinformować, że nasz serwis internetowy może personalizować treści marketingowe do Twoich potrzeb. W związku z tym danymi osobowymi, kt&oacute;re przetwarzamy są np. Tw&oacute;j adres IP, dane pozyskiwane na podstawie plik&oacute;w cookies lub podobnych mechanizm&oacute;w na Twoim urządzeniu o ile pozwolą one na zidentyfikowanie Ciebie.&nbsp;<br />
+Więcej informacji odnośnie przetwarzania danych osobowych znajdziesz w naszej <a href="/info/1,polityka-prywatnosci">Polityce Prywatności.</a></p><p>Jest to demo skryptu, w kt&oacute;rym dostęp do Panelu Administratora mają wszyscy użytkownicy. Dlatego też w panelu mogą zobaczyć Tw&oacute;j login, adres IP i inne dane (bez adresu email) jeśli zarejestrujesz się na stronie lub podejmiesz inne działanie. Prosimy mieć to na względzie.</p>
+'),
 ('show_contact_form_profile', '1'),
 ('show_title_desc', ''),
 ('smtp', ''),

@@ -13,7 +13,7 @@
 	<!-- CSS style -->
 	<link rel="stylesheet" href="views/{{ settings.template }}/css/bulma.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-	<link rel="stylesheet" href="views/{{ settings.template }}/css/style.css"/>
+	<link rel="stylesheet" href="views/{{ settings.template }}/css/style.css?{{ settings.assets_version }}"/>
 	{% if settings.favicon %}<link rel="shortcut icon" href="{{ settings.favicon }}">{% endif %}
 	{% if settings.code_style %}<style>{{ settings.code_style|raw }}</style>{% endif %}
 
@@ -173,7 +173,7 @@
 {% endif %}
 
 {% block javascript %}
-	<script src="views/{{ settings.template }}/js/engine.js"></script>
+	<script src="views/{{ settings.template }}/js/engine.js?{{ settings.assets_version }}"></script>
 
 	{% if settings.facebook_side_panel or settings.social_facebook or allow_comments_fb_picture or allow_comments_fb_profile %}
 		<script>(function(d, s, id) {
