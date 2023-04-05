@@ -485,7 +485,10 @@ function sendMail($type,$email,$data=''){
 			}
 			if(isset($data['email'])){
 				$header = 'Reply-To: <'.$data['email']."> \r\n";
-				if($settings['smtp']){$mail->AddReplyTo($data['email']);}
+				if($settings['smtp']){
+					$mail->clearReplyTos();
+					$mail->AddReplyTo($data['email']);
+				}
 				$message = str_replace("{email}",$data['email'],$message);
 				$subject = str_replace("{email}",$data['email'],$subject);
 			}
