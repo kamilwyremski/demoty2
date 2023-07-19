@@ -337,7 +337,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('facebook_secret', ''),
 ('facebook_side_panel', ''),
 ('favicon', '/upload/images/favicon.png'),
-('footer_bottom', '<p style=\"text-align: center;\">Wszelkie obrazki i filmy na stronie są dodawane przez użytkownik&oacute;w serwisu i jego właściciel nie bierze za nie odpowiedzialności.</p>\r\n<p class=\"has-text-centered\"><small>Web script Demoty2.7.2 &copy; Project 2018 - 2023 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a></small></p>'),
+('footer_bottom', '<p style=\"text-align: center;\">Wszelkie obrazki i filmy na stronie są dodawane przez użytkownik&oacute;w serwisu i jego właściciel nie bierze za nie odpowiedzialności.</p>\r\n<p class=\"has-text-centered\"><small>Web script Demoty2.7.3 &copy; Project 2018 - 2023 by <a href=\"https://itworksbetter.net\" target=\"_blank\" title=\"Creating websites\">IT Works Better</a></small></p>'),
 ('footer_top', '<p>DEMOTY2 to nowoczesny skrypt dla stron internetowych z demotywatorami. Umożliwia tworzenie i edycję własnych demotywator&oacute;w, głosowanie na nie oraz dodawanie komentarzy.</p>\r\n\r\n<p>Do skryptu dołączony jest Panel Administratora umożliwiający łatwą edycję ustawień strony.&nbsp;<br />\r\nPanel jest dostępny pod adresem: <a href=\"https://demoty2.itworksbetter.net/admin\" target=\"_blank\">https://itworksbetter.net/admin</a><br />\r\nLogin: test<br />\r\nHasło: 1234</p>\r\n'),
 ('generate_sitemap', '1'),
 ('google_id', ''),

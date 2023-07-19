@@ -40,6 +40,10 @@ a:hover{
 strong{
 	color: inherit;
 }
+.pagination-link[disabled], .pagination-next[disabled], .pagination-previous[disabled] {
+	background-color: transparent;
+	color: #fff;
+}
 /* pictures */
 #pictures_box{
 	width: 600px; max-width: 100%; margin-top: 12px;

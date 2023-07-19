@@ -33,6 +33,7 @@
 
 </head>
 <body class="has-background-black-ter">
+<div id="fb-root"></div>
 <div class="has-background-dark navbar_box">
   <nav class="navbar is-dark content" role="navigation" aria-label="Main navigation">
   	<div class="navbar-brand">

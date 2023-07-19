@@ -1,6 +1,6 @@
 <?php
 /************************************************************************
- * The script of website with demotivators DEMOTY 2.7.2
+ * The script of website with demotivators DEMOTY 2.7.3
  * Copyright (c) 2018 - 2023 by IT Works Better https://itworksbetter.net
  * Project by Kamil Wyremski https://wyremski.pl
  *

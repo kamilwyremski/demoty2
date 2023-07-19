@@ -14,15 +14,15 @@
     <div id="pictures_box">
       <div class="picture">
         <img src="upload/pictures/{{ picture.filename }}{% if picture.version %}?v={{ picture.version }}{% endif %}" alt="{{ picture.title }}">
-        <h1 class="is-size-2">{{ picture.title }}</h1>
+        <h1 class="is-size-3">{{ picture.title }}</h1>
 		<p>{{ picture.description|nl2br }}</p>
         <div class="set_voice_outside is-size-4">
           <div class="set_voice_box">
-            <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-plus-square"></i></a>
+            <a href="#modal_voice_only_logged" title="{{ 'Plus'|lang }}" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-plus-square"></i></a>
             <span class="voice_plus">{{ picture.voices_plus }}</span>
           </div>
           <div class="set_voice_box">
-            <a href="#modal_voice_only_logged" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="-1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-minus-square"></i></a>
+            <a href="#modal_voice_only_logged" title="{{ 'Minus'|lang }}" class="has-text-white-ter {% if settings.voice_only_logged and not user.id %}modal_trigger{% else %}set_voice{% endif %}" data-picture_id="{{ picture.id }}" data-voice="-1" data-token="{{ generateToken('set_voice') }}"><i class="fas fa-minus-square"></i></a>
             <span class="voice_minus">{{ picture.voices_minus }}</span>
           </div>
         </div>
