@@ -442,3 +442,5 @@ $translate['Code of ads on the bottom page'] = 'Code der Werbung Unterseite';
 $translate['Show the title and description in the picture list'] = 'Den Titel und die Beschreibung in der Bilderliste anzeigen';
 $translate['Ads between pictures'] = 'Werbung zwischen Bildern';
 $translate['Folder and file names should not contain spaces or Deutsch letters'] = 'Ordner- und Dateinamen sollten keine Leerzeichen und keine deutschen Buchstaben enthalten';
+$translate['Plus'] = 'Plus';
+$translate['Minus'] = 'Minus';

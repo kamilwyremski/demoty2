@@ -10,6 +10,10 @@
 	<title>{{ settings.title }}</title>
 	<base href="{{ settings.base_url }}/">
 
+	{% if settings.facebook_side_panel or settings.social_facebook or settings.allow_comments_fb_picture or settings.allow_comments_fb_profile %}
+		<link rel="preconnect" href="https://connect.facebook.net">
+	{% endif %}
+
 	<!-- CSS style -->
 	<link rel="stylesheet" href="views/{{ settings.template }}/css/bulma.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -169,14 +173,14 @@
 {% if settings.facebook_side_panel %}
 	<div id="facebook_panel" class="is-hidden-mobile">
 		<div id="facebook_panel_image"><img src="{{ settings.base_url }}/views/{{ settings.template }}/images/facebook-side.png" alt="Facebook" width="10" height="21"></div>
-		<div class="fb-page" data-href="{{ settings.url_facebook }}" data-tabs="timeline" data-width="300" data-height="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ settings.url_facebook }}" class="fb-xfbml-parse-ignore"><a href="{{ settings.url_facebook }}">Facebook</a></blockquote></div>
+		<div class="fb-page" data-href="{{ settings.url_facebook }}" data-show-posts="true"z data-width="300" data-height="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="{{ settings.url_facebook }}" class="fb-xfbml-parse-ignore"><a href="{{ settings.url_facebook }}">Facebook</a></blockquote></div>
 	</div>
 {% endif %}
 
 {% block javascript %}
 	<script src="views/{{ settings.template }}/js/engine.js?{{ settings.assets_version }}"></script>
 
-	{% if settings.facebook_side_panel or settings.social_facebook or allow_comments_fb_picture or allow_comments_fb_profile %}
+	{% if settings.facebook_side_panel or settings.social_facebook or settings.allow_comments_fb_picture or settings.allow_comments_fb_profile %}
 		<script>(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) return;

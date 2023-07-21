@@ -444,3 +444,5 @@ $translate['Show the title and description in the picture list'] = 'Pokazuj tytu
 $translate['Ads between pictures'] = 'Reklamy pomiędzy obrazkami';
 $translate['Folder and file names should not contain spaces or Polish letters'] = 'Nazwy folderów i plików nie powinny zawierać spacji ani polskich liter';
 $translate['Share'] = 'Udostępnij';
+$translate['Plus'] = 'Plus';
+$translate['Minus'] = 'Minus';

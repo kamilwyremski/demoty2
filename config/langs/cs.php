@@ -444,3 +444,5 @@ $translate['Show the title and description in the picture list'] = 'Zobrazit ná
 $translate['Ads between pictures'] = 'Reklamy mezi obrázky';
 $translate['Folder and file names should not contain spaces or Polish letters'] = 'Názvy složek a souborů by neměly obsahovat mezery ani české znaky';
 $translate['Share'] = 'Sdílet';
+$translate['Plus'] = 'Plus';
+$translate['Minus'] = 'Mínus';
