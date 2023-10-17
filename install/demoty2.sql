@@ -358,7 +358,7 @@ INSERT INTO `settings` (`name`, `value`) VALUES
 ('rss', '1'),
 ('rodo_alert', ''),
 ('rodo_alert_text', '<p>Szanowny użytkowniku,<br />pragniemy Cię poinformować, że nasz serwis internetowy może personalizować treści marketingowe do Twoich potrzeb. W związku z tym danymi osobowymi, kt&oacute;re przetwarzamy są np. Tw&oacute;j adres IP, dane pozyskiwane na podstawie plik&oacute;w cookies lub podobnych mechanizm&oacute;w na Twoim urządzeniu o ile pozwolą one na zidentyfikowanie Ciebie.&nbsp;<br />
-Więcej informacji odnośnie przetwarzania danych osobowych znajdziesz w naszej <a href="/info/1,polityka-prywatnosci">Polityce Prywatności.</a></p>'),
+Więcej informacji odnośnie przetwarzania danych osobowych znajdziesz w naszej <a href="/info/1-polityka-prywatnosci" class="has-text-black">Polityce Prywatności.</a></p>'),
 ('show_contact_form_profile', '1'),
 ('show_title_desc', ''),
 ('smtp', ''),
