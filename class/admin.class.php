@@ -14,6 +14,8 @@
 
 class admin {
 
+	private $user_data;
+
 	public function __construct () {
 		global $db;
 
