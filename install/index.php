@@ -17,12 +17,17 @@ header('Content-Type: text/html; charset=utf-8');
 
 ob_start();
 
-if(phpversion()<7.2){
+if (phpversion() < 7.2) {
 	die('Wrong version of PHP on the server. The minimum supported is 7.2');
 }
 
-if(!is_writable('../config/db.php')){
+if( !is_writable('../config/db.php')) {
   die('The file /config/db.php is not writable!');
+}
+
+if (!file_exists('../vendor/autoload.php')) {
+    die('Error: Missing vendor directory or autoload.php file.<br>Please run <code>composer install</code> before starting the installation.'
+    );
 }
 
 $install = true;
